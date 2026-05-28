@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 40% 98%;
+    --foreground: 215 60% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 215 60% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 60% 12%;
+    --primary: 215 80% 15%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 213 75% 48%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 215 16% 95%;
+    --muted-foreground: 215 16% 40%;
+    --accent: 16 100% 60%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 215 20% 88%;
+    --input: 215 20% 88%;
+    --ring: 213 75% 48%;
+    --radius: 0.75rem;
+  }
+}
+
+* { @apply border-border; }
+html { scroll-behavior: smooth; }
+body { @apply bg-brand-cream text-brand-ink font-sans antialiased; }
+
+.section { @apply py-28 md:py-40; }
+.eyebrow { @apply inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-blue; }
+.h-display { @apply font-display font-bold tracking-[-0.04em] text-brand-navy; }
+.btn-primary { @apply inline-flex items-center gap-2 rounded-full bg-brand-blue px-6 py-3 text-sm font-medium text-white transition-all duration-500 hover:-translate-y-0.5 hover:bg-brand-accentDark; }
+.btn-primary svg { @apply transition-transform duration-500; }
+.btn-primary:hover svg { transform: translateX(4px); }
+.btn-secondary { @apply inline-flex items-center gap-2 rounded-full bg-transparent px-6 py-3 text-sm font-medium text-brand-navy transition-all duration-500 hover:text-brand-blue; }
+.btn-secondary svg { @apply transition-transform duration-500; }
+.btn-secondary:hover svg { transform: translateX(4px); }
+.btn-ghost { @apply inline-flex items-center gap-2 rounded-full bg-white/80 backdrop-blur px-6 py-3 text-sm font-medium text-brand-navy transition-all duration-500 hover:bg-white hover:-translate-y-0.5; }
+.btn-ghost svg { @apply transition-transform duration-500; }
+.btn-ghost:hover svg { transform: translateX(4px); }
+.badge-tech { @apply inline-flex items-center rounded-full bg-brand-sky text-brand-navy px-3 py-1 text-[11px] font-medium tracking-[0.18em] uppercase; }
+.subtle-link { @apply text-brand-blue hover:text-brand-accent transition; }
+.card-soft { @apply rounded-3xl bg-white/80 backdrop-blur border border-transparent shadow-[0_20px_60px_-34px_rgba(0,0,0,0.45)]; }
+.grid-pattern { background-image: radial-gradient(circle at 1px 1px, rgba(10,37,64,0.08) 1px, transparent 0); background-size: 24px 24px; }
+.reveal { opacity: 1; }
+.ambient-orb { position: absolute; border-radius: 9999px; filter: blur(55px); pointer-events: none; z-index: 0; }
+.magnetic { transition: transform 380ms cubic-bezier(0.2, 0.7, 0.1, 1), box-shadow 380ms cubic-bezier(0.2, 0.7, 0.1, 1), background-color 380ms ease; }
+.magnetic:hover { transform: translateY(-4px) scale(1.01); box-shadow: 0 18px 40px -30px rgba(20, 36, 54, 0.75); }
+.ticker-track { display: flex; width: max-content; animation: marquee 42s linear infinite; }
+
+@supports (animation-timeline: view()) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    animation: reveal-up both ease-out;
+    animation-timeline: view();
+    animation-range: entry 10% cover 35%;
+  }
+}
+
+@keyframes reveal-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
