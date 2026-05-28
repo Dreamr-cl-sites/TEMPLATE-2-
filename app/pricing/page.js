@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from 'next/link'; 
 import { Check, ShieldCheck, ArrowRight, Sparkles, Phone } from 'lucide-react';
 import { site } from '@/lib/site-config';
 import CtaBanner from '@/components/site/CtaBanner';
