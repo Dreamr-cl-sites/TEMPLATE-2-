@@ -3,45 +3,43 @@ import { ArrowRight, MapPin, Phone } from 'lucide-react';
 import { site } from '@/lib/site-config';
 import { locations } from '@/lib/locations-data';
 
-const city = site.address.city;
-
 export const metadata = {
-  title: `Plumbing Service Areas | ${city} Metro`,
-  description: `Location-specific plumbing pages for every city we serve around ${city}. Find your area and call for same-day service.`,
+  title: `Plumbing Service Areas | ${site.address.city} Metro`,
+  description: `Maston’s Plumbing and Drain serves Tulsa, Broken Arrow, Bixby, Jenks, Owasso, Sand Springs, Sapulpa, and surrounding Green Country communities.`,
 };
 
 export default function LocationsPage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-black/5">
-        <div className="container pt-14 pb-16">
+      <section className="relative overflow-hidden border-b border-brand-blue/10">
+        <div className="container pb-16 pt-14">
           <div className="max-w-3xl">
-            <div className="eyebrow"><MapPin className="w-3.5 h-3.5" /> Service areas</div>
-            <h1 className="h-display text-5xl md:text-6xl leading-[0.95] mt-3">Local plumbing pages for each city we serve.</h1>
-            <p className="text-brand-mute mt-3">Pick your city page for area-specific coverage, neighborhood details, and links to the most relevant plumbing services.</p>
+            <div className="eyebrow"><MapPin className="h-3.5 w-3.5" /> Service areas</div>
+            <h1 className="h-display mt-3 text-5xl leading-[0.95] md:text-6xl">Tulsa-area plumbing service across Green Country.</h1>
+            <p className="mt-3 text-brand-mute">Maston’s routes plumbing and drain service across Tulsa and the nearby communities that depend on fast, friendly, local help.</p>
           </div>
         </div>
       </section>
 
       <section className="section">
-        <div className="container grid md:grid-cols-2 xl:grid-cols-3 gap-5">
+        <div className="container grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {locations.map((location) => (
-            <Link key={location.slug} href={`/locations/${location.slug}`} className="card-soft p-6 hover:-translate-y-1 transition">
+            <Link key={location.slug} href={`/locations/${location.slug}`} className="card-soft p-6 transition hover:-translate-y-1">
               <h2 className="h-display text-3xl leading-tight">{location.name}, {location.region}</h2>
-              <p className="text-sm text-brand-mute mt-2">{location.summary}</p>
-              <p className="text-xs text-brand-blue mt-4">Neighborhoods: {location.neighborhoods.join(', ')}</p>
-              <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-blue">Open location page <ArrowRight className="w-4 h-4" /></span>
+              <p className="mt-2 text-sm text-brand-mute">{location.summary}</p>
+              <p className="mt-4 text-xs text-brand-blue">Neighborhoods: {location.neighborhoods.join(', ')}</p>
+              <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-blue">Open service-area page <ArrowRight className="h-4 w-4" /></span>
             </Link>
           ))}
         </div>
 
         <div className="container mt-12">
-          <div className="card-soft p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div className="card-soft flex flex-col gap-4 p-8 md:flex-row md:items-center md:justify-between">
             <div>
-              <h3 className="h-display text-3xl leading-tight">Not sure which location page fits?</h3>
-              <p className="text-brand-mute mt-2">Call and we will route you to the right local service team.</p>
+              <h3 className="h-display text-3xl leading-tight">Not sure whether Maston’s serves your address?</h3>
+              <p className="mt-2 text-brand-mute">Call and dispatch will confirm coverage and the right service path.</p>
             </div>
-            <Link href={`tel:${site.phoneRaw}`} className="btn-primary"><Phone className="w-4 h-4" /> Call {site.phone}</Link>
+            <Link href={`tel:${site.phoneRaw}`} className="btn-primary"><Phone className="h-4 w-4" /> Call {site.phone}</Link>
           </div>
         </div>
       </section>

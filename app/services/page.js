@@ -1,41 +1,50 @@
-import Link from 'next/link';
 import Image from 'next/image';
-import { Wrench, ArrowRight, ChevronRight, Siren, Waves, Flame, Droplets, Pipette, GitFork, Building2 } from 'lucide-react';
+import Link from 'next/link';
+import { Building2, ChevronRight, Droplets, Flame, GitFork, Pipette, ShieldCheck, Siren, Waves, Wrench } from 'lucide-react';
 import { services } from '@/lib/services-data';
 import { images, site } from '@/lib/site-config';
 import CtaBanner from '@/components/site/CtaBanner';
 
-const ICONS = { Siren, Waves, Flame, Droplets, Pipette, Wrench, GitFork, Building2 };
-export const metadata = { title: `Plumbing Services in ${site.address.city}`, description: 'Dedicated pages for each plumbing service with service-specific keywords, pricing expectations, process details, and FAQs.' };
+const ICONS = { Siren, Waves, Flame, Droplets, Pipette, Wrench, GitFork, Building2, ShieldCheck };
+
+export const metadata = {
+  title: `Plumbing Services in ${site.address.city}`,
+  description: 'Emergency plumbing, drain cleaning, sewer service, water heaters, leak repair, gas lines, filtration, repiping, and commercial plumbing from Maston’s.',
+};
 
 export default function ServicesPage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-black/5">
+      <section className="relative overflow-hidden border-b border-brand-blue/10">
         <div className="absolute inset-0 bg-gradient-to-br from-brand-cream via-white to-brand-sky" />
-        <div className="absolute inset-0 grid-pattern opacity-40" />
-        <div className="container relative pt-16 pb-20 grid lg:grid-cols-[1.2fr_1fr] gap-10 items-end">
+        <div className="container relative grid gap-10 pb-20 pt-16 lg:grid-cols-[1.2fr_1fr] lg:items-end">
           <div>
-            <div className="eyebrow"><Wrench className="w-3.5 h-3.5" /> Services</div>
-            <h1 className="h-display text-5xl md:text-6xl mt-3">Every plumbing service your home needs.</h1>
-            <p className="mt-5 text-lg text-brand-mute max-w-2xl">From a midnight burst pipe to a planned whole-home repipe — master plumbers, flat-rate pricing, one-year labor warranty on everything.</p>
+            <div className="eyebrow"><Wrench className="h-3.5 w-3.5" /> Maston’s services</div>
+            <h1 className="h-display mt-3 text-5xl leading-[0.95] md:text-6xl">Plumbing and drain help for Tulsa homes and businesses.</h1>
+            <p className="mt-5 max-w-2xl text-lg text-brand-mute">
+              From a late-night emergency to a planned water filtration upgrade, Maston’s gives Green Country a local team, clear communication, and service the way it ought to be.
+            </p>
           </div>
-          <div className="relative aspect-[5/4] rounded-3xl overflow-hidden shadow-xl"><Image src={images.workShot3} alt="Plumber" fill className="object-cover" sizes="50vw" /></div>
+          <div className="relative aspect-[5/4] overflow-hidden rounded-3xl bg-brand-sky shadow-xl">
+            <Image src={images.van} alt="Maston’s Plumbing and Drain service van" fill className="object-contain p-6" sizes="50vw" />
+          </div>
         </div>
       </section>
 
       <section className="section">
-        <div className="container grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {services.map((s) => {
-            const Icon = ICONS[s.icon] || Wrench;
+        <div className="container grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {services.map((service) => {
+            const Icon = ICONS[service.icon] || Wrench;
             return (
-              <Link key={s.slug} href={`/services/${s.slug}`} className="card-soft p-7 group hover:-translate-y-1 hover:shadow-xl transition-all flex flex-col">
-                <div className="w-12 h-12 rounded-xl bg-brand-sky grid place-items-center group-hover:bg-brand-accent transition"><Icon className="w-6 h-6 text-brand-blue group-hover:text-white transition" /></div>
-                <h3 className="mt-5 font-display text-xl font-bold text-brand-navy">{s.name}</h3>
-                <p className="mt-2 text-sm text-brand-mute leading-relaxed flex-1">{s.short}</p>
+              <Link key={service.slug} href={`/services/${service.slug}`} className="card-soft group flex flex-col p-7 transition-all hover:-translate-y-1 hover:shadow-xl">
+                <div className="grid h-12 w-12 place-items-center rounded-xl bg-brand-sky transition group-hover:bg-brand-accent">
+                  <Icon className="h-6 w-6 text-brand-blue transition group-hover:text-white" />
+                </div>
+                <h3 className="mt-5 font-display text-xl font-bold text-brand-navy">{service.name}</h3>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-brand-mute">{service.short}</p>
                 <div className="mt-5 flex items-center justify-between">
-                  <span className="text-xs text-brand-mute">From <span className="font-semibold text-brand-navy">${s.priceFrom}</span></span>
-                  <span className="inline-flex items-center gap-1 text-sm font-semibold text-brand-blue group-hover:text-brand-accent transition">Details <ChevronRight className="w-4 h-4" /></span>
+                  <span className="text-xs font-semibold text-brand-mute">Tulsa metro service</span>
+                  <span className="inline-flex items-center gap-1 text-sm font-bold text-brand-blue transition group-hover:text-brand-rust">Details <ChevronRight className="h-4 w-4" /></span>
                 </div>
               </Link>
             );
@@ -43,7 +52,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <CtaBanner />
+      <CtaBanner title="Know what you need, or just know something is wrong?" subtitle="Call Maston’s. A real person will help route the right plumber, drain technician, or water heater specialist." />
     </>
   );
 }

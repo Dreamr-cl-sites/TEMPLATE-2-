@@ -5,9 +5,10 @@ import { v4 as uuidv4 } from 'uuid';
 let client; let db;
 async function getDb() {
   if (db) return db;
+  if (!process.env.MONGO_URL) return null;
   client = new MongoClient(process.env.MONGO_URL);
   await client.connect();
-  db = client.db(process.env.DB_NAME || 'plumber_template');
+  db = client.db(process.env.DB_NAME || 'mastons_plumbing');
   return db;
 }
 
@@ -22,7 +23,7 @@ export async function OPTIONS() { return cors({}); }
 
 export async function GET(req, { params }) {
   const path = (params?.path || []).join('/');
-  if (!path) return cors({ ok: true, service: 'plumber-template', timestamp: new Date().toISOString() });
+  if (!path) return cors({ ok: true, service: 'mastons-plumbing', timestamp: new Date().toISOString() });
   if (path === 'health') return cors({ ok: true });
   return cors({ error: 'not_found', path }, { status: 404 });
 }
@@ -48,7 +49,7 @@ export async function POST(req, { params }) {
         message: String(body.message || '').slice(0, 2000),
         createdAt: new Date().toISOString(),
       };
-      await database.collection('leads').insertOne(doc);
+      if (database) await database.collection('leads').insertOne(doc);
       return cors({ ok: true, id: doc.id });
     }
 
@@ -69,14 +70,14 @@ export async function POST(req, { params }) {
         notes: String(body.notes || '').slice(0, 2000),
         createdAt: new Date().toISOString(),
       };
-      await database.collection('leads').insertOne(doc);
+      if (database) await database.collection('leads').insertOne(doc);
       return cors({ ok: true, id: doc.id });
     }
 
     if (path === 'newsletter') {
       const email = String(body.email || '').trim();
       if (!email) return cors({ error: 'missing_email' }, { status: 400 });
-      await database.collection('newsletter').insertOne({ id: uuidv4(), email, createdAt: new Date().toISOString() });
+      if (database) await database.collection('newsletter').insertOne({ id: uuidv4(), email, createdAt: new Date().toISOString() });
       return cors({ ok: true });
     }
 

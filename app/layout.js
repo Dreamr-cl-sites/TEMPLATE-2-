@@ -1,6 +1,6 @@
 import { Manrope, Space_Grotesk } from 'next/font/google';
 import './globals.css';
-import { site } from '@/lib/site-config';
+import { site, images } from '@/lib/site-config';
 import { Toaster } from '@/components/ui/sonner';
 import Navbar from '@/components/site/Navbar';
 import Footer from '@/components/site/Footer';
@@ -9,15 +9,28 @@ import EmergencyBar from '@/components/site/EmergencyBar';
 const manrope = Manrope({ subsets: ['latin'], variable: '--font-manrope', display: 'swap' });
 const grotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-grotesk', display: 'swap' });
 
-// EDIT: SEO defaults. Add a real /public/og.jpg for social previews.
 export const metadata = {
-  metadataBase: new URL('https://example.com'),
-  title: { default: `${site.name} — ${site.tagline}`, template: `%s | ${site.name}` },
+  metadataBase: new URL('https://www.mastonstulsa.com'),
+  title: { default: `${site.name} | ${site.tagline}`, template: `%s | ${site.name}` },
   description: site.description,
-  keywords: [`plumber in ${site.address.city}`, `${site.address.city} plumbing company`, 'local plumbing service'],
+  keywords: [
+    'Tulsa plumber',
+    'emergency plumber Tulsa',
+    'drain cleaning Tulsa',
+    'water heater repair Tulsa',
+    'Maston’s Plumbing and Drain',
+  ],
+  icons: {
+    icon: images.logo,
+    shortcut: images.logo,
+    apple: images.logo,
+  },
   openGraph: {
-    title: `${site.name} — ${site.tagline}`,
+    title: `${site.name} | ${site.tagline}`,
     description: site.description,
+    url: 'https://www.mastonstulsa.com',
+    siteName: site.name,
+    images: [{ url: images.van, width: 1200, height: 630, alt: 'Maston’s Plumbing and Drain service van' }],
     type: 'website',
     locale: 'en_US',
   },

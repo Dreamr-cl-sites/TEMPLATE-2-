@@ -1,49 +1,62 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Award, Users, Sparkles, ShieldCheck, ArrowRight, CheckCircle2 } from 'lucide-react';
-import { site, images, testimonials } from '@/lib/site-config';
+import { Award, CheckCircle2, HeartHandshake, ShieldCheck, Users } from 'lucide-react';
+import { site, images } from '@/lib/site-config';
 import CtaBanner from '@/components/site/CtaBanner';
 
-export const metadata = { title: 'About Us', description: `Meet the team at ${site.name}. ${site.yearsInBusiness}+ years, 12,000+ happy homes.` };
+export const metadata = {
+  title: 'About Maston’s Plumbing and Drain',
+  description: 'Learn about Maston’s Plumbing and Drain, a veteran-owned and family-owned Tulsa plumbing company built around service the way it ought to be.',
+};
 
 export default function AboutPage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-black/5">
+      <section className="relative overflow-hidden border-b border-brand-blue/10">
         <div className="absolute inset-0 bg-gradient-to-br from-brand-cream via-white to-brand-sky" />
-        <div className="absolute inset-0 grid-pattern opacity-40" />
-        <div className="container relative pt-16 pb-20 grid lg:grid-cols-[1.1fr_1fr] gap-12 items-center">
+        <div className="container relative grid gap-12 pb-20 pt-16 lg:grid-cols-[1.1fr_1fr] lg:items-center">
           <div>
-            <div className="eyebrow"><Users className="w-3.5 h-3.5" /> About us</div>
-            <h1 className="h-display text-5xl md:text-6xl mt-3">A {site.yearsInBusiness}-year promise: do good work, charge a fair price.</h1>
-            <p className="mt-5 text-lg text-brand-mute max-w-2xl">{site.name} was founded on a simple idea — that homeowners deserve a plumber who treats their home, their time, and their wallet with respect.</p>
+            <div className="eyebrow"><Users className="h-3.5 w-3.5" /> About Maston’s</div>
+            <h1 className="h-display mt-3 text-5xl leading-[0.95] md:text-6xl">A Tulsa plumbing company built on respect.</h1>
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-brand-mute">
+              Maston’s Plumbing and Drain is veteran owned, family owned, and focused on a simple promise: treat people the way service ought to feel. That means answering the phone, explaining the work, respecting the home, and standing behind the recommendation.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link href="/services" className="btn-primary">Explore services</Link>
+              <Link href={`tel:${site.phoneRaw}`} className="btn-secondary">Call {site.phone}</Link>
+            </div>
           </div>
-          <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl"><Image src={images.plumberTeam} alt="Our team" fill className="object-cover" sizes="50vw" /></div>
+          <div className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-brand-sky shadow-2xl">
+            <Image src={images.mascot} alt="Maston’s plumber mascot" fill className="object-contain p-8" sizes="50vw" />
+          </div>
         </div>
       </section>
 
       <section className="section">
-        <div className="container grid md:grid-cols-4 gap-5">
-          {site.stats.map((s) => (
-            <div key={s.label} className="card-soft p-7 text-center">
-              <div className="font-display text-4xl md:text-5xl font-extrabold text-brand-navy">{s.value}</div>
-              <div className="mt-2 text-xs uppercase tracking-wider text-brand-mute">{s.label}</div>
+        <div className="container grid gap-5 md:grid-cols-4">
+          {site.stats.map((stat) => (
+            <div key={stat.label} className="card-soft p-7 text-center">
+              <div className="font-display text-4xl font-extrabold text-brand-navy md:text-5xl">{stat.value}</div>
+              <div className="mt-2 text-xs font-semibold uppercase tracking-wider text-brand-mute">{stat.label}</div>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="section bg-white border-y border-black/5">
-        <div className="container grid lg:grid-cols-2 gap-12 items-center">
-          <div className="relative aspect-[5/6] rounded-3xl overflow-hidden shadow-xl"><Image src={images.workShot2} alt="At work" fill className="object-cover" sizes="50vw" /></div>
+      <section className="section border-y border-brand-blue/10 bg-white">
+        <div className="container grid gap-12 lg:grid-cols-2 lg:items-center">
+          <div className="relative aspect-[5/4] overflow-hidden rounded-3xl shadow-xl">
+            <Image src={images.plumberTeam} alt="Maston’s plumbing team" fill className="object-cover" sizes="50vw" />
+          </div>
           <div>
-            <div className="eyebrow"><Sparkles className="w-3.5 h-3.5" /> Our story</div>
-            <h2 className="h-display text-4xl md:text-5xl mt-3">It started with one truck and one rule.</h2>
-            <p className="mt-5 text-brand-mute leading-relaxed">After {site.yearsInBusiness} years in the trade, our founder was tired of one thing: watching neighbors get burned by dishonest plumbers. So in {new Date().getFullYear() - site.yearsInBusiness}, he started {site.name} with one rule — quote the real price, do the real work, and stand behind it.</p>
-            <p className="mt-4 text-brand-mute leading-relaxed">12,000+ jobs later, that rule has not changed. We still answer the phone. We still show up on time. And we still treat every home like it is our own.</p>
+            <div className="eyebrow"><HeartHandshake className="h-3.5 w-3.5" /> Service culture</div>
+            <h2 className="h-display mt-3 text-4xl leading-[0.95] md:text-5xl">The brand promise is not decoration. It is the operating system.</h2>
+            <p className="mt-5 leading-relaxed text-brand-mute">
+              “The Way Service Ought to Be” shows up in practical ways: clear scheduling, careful diagnosis, honest options, clean work habits, and communication that does not make the customer decode technical jargon.
+            </p>
             <ul className="mt-8 space-y-3">
-              {['Family-owned and operated since ' + (new Date().getFullYear() - site.yearsInBusiness),'Master plumbers — not subcontractors','Background-checked, drug-tested techs','Trucks stocked to finish 95% of jobs in one visit'].map((p) => (
-                <li key={p} className="flex gap-3 text-brand-navy"><CheckCircle2 className="w-5 h-5 text-brand-accent flex-shrink-0 mt-0.5" />{p}</li>
+              {['Veteran-owned discipline and accountability', 'Family-owned care for the customer relationship', '24/7 help for urgent plumbing problems', 'Service across Tulsa and surrounding Green Country communities'].map((point) => (
+                <li key={point} className="flex gap-3 text-brand-navy"><CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-rust" />{point}</li>
               ))}
             </ul>
           </div>
@@ -52,69 +65,39 @@ export default function AboutPage() {
 
       <section className="section">
         <div className="container">
-          <div className="text-center max-w-2xl mx-auto">
-            <div className="eyebrow justify-center"><ShieldCheck className="w-3.5 h-3.5" /> Our values</div>
-            <h2 className="h-display text-4xl md:text-5xl mt-3">Four rules. No exceptions.</h2>
+          <div className="mx-auto max-w-2xl text-center">
+            <div className="eyebrow justify-center"><ShieldCheck className="h-3.5 w-3.5" /> What customers can expect</div>
+            <h2 className="h-display mt-3 text-4xl leading-[0.95] md:text-5xl">Four standards on every visit.</h2>
           </div>
-          <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {[
-              { t: 'Honesty first', d: 'We tell you the truth even when it costs us the job. Bad news is always better than a surprise bill.' },
-              { t: 'Respect your home', d: 'Shoe covers. Drop cloths. Clean up better than we found it. Every visit.' },
-              { t: 'Show up on time', d: 'Real arrival windows. Real text updates. If we are late, your service is free.' },
-              { t: 'Stand behind the work', d: 'One-year labor warranty on everything. If it fails, we come back free.' },
-            ].map((v, i) => (
-              <div key={v.t} className="card-soft p-7">
-                <div className="font-display text-5xl font-extrabold text-brand-sky">0{i + 1}</div>
-                <h3 className="mt-3 font-display text-lg font-bold text-brand-navy">{v.t}</h3>
-                <p className="mt-2 text-sm text-brand-mute leading-relaxed">{v.d}</p>
+              { t: 'Answer the call', d: 'Urgent plumbing issues need calm, responsive guidance, not voicemail roulette.' },
+              { t: 'Explain the options', d: 'Customers deserve to know what failed, what can wait, and what should be fixed now.' },
+              { t: 'Respect the property', d: 'A good plumber leaves the work area safer, cleaner, and easier to understand.' },
+              { t: 'Serve locally', d: 'Tulsa, Broken Arrow, Bixby, Jenks, Owasso, and nearby communities are not an afterthought.' },
+            ].map((value, index) => (
+              <div key={value.t} className="card-soft p-7">
+                <div className="font-display text-5xl font-extrabold text-brand-sky">0{index + 1}</div>
+                <h3 className="mt-3 font-display text-lg font-bold text-brand-navy">{value.t}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-brand-mute">{value.d}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* TEAM */}
-      <section className="section bg-white border-y border-black/5">
-        <div className="container">
-          <div className="flex items-end justify-between mb-10">
-            <div>
-              <div className="eyebrow"><Users className="w-3.5 h-3.5" /> The team</div>
-              <h2 className="h-display text-4xl md:text-5xl mt-3">Real people, real names, real licenses.</h2>
+      <section className="section border-y border-brand-blue/10 bg-white">
+        <div className="container grid gap-8 md:grid-cols-3">
+          {site.trustBadges.map((badge) => (
+            <div key={badge} className="card-soft flex items-center gap-4 p-6">
+              <Award className="h-7 w-7 flex-shrink-0 text-brand-accent" />
+              <span className="font-display text-xl font-bold text-brand-navy">{badge}</span>
             </div>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {/* EDIT: replace team members with real ones. Add /public/team/*.jpg images. */}
-            {[
-              { name: 'Mike Hernandez', role: 'Founder & Master Plumber', img: images.heroPlumber, bio: '24-year veteran. ASSE 5110 certified. Started the company in his driveway.' },
-              { name: 'Tasha Brooks',   role: 'Service Manager',         img: images.plumberTeam, bio: 'Runs the schedule and makes sure every customer is taken care of, first call to last.' },
-              { name: 'Andre Patel',    role: 'Lead Technician',          img: images.workShot3,  bio: 'Specializes in tankless water heaters and trenchless sewer repair. 12 years on the job.' },
-            ].map((p) => (
-              <div key={p.name} className="card-soft overflow-hidden">
-                <div className="relative aspect-[4/5]"><Image src={p.img} alt={p.name} fill className="object-cover" sizes="33vw" /></div>
-                <div className="p-6">
-                  <div className="font-display text-xl font-bold text-brand-navy">{p.name}</div>
-                  <div className="text-sm text-brand-blue font-semibold">{p.role}</div>
-                  <p className="mt-3 text-sm text-brand-mute">{p.bio}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          ))}
         </div>
       </section>
 
-      <section className="section">
-        <div className="container">
-          <div className="eyebrow justify-center text-center"><Award className="w-3.5 h-3.5" /> Certifications</div>
-          <h2 className="h-display text-4xl md:text-5xl mt-3 text-center">Licensed, certified, and verified.</h2>
-          <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
-            {['State Master Plumber License #PL-00928374','$2M General Liability Insurance','BBB A+ Accredited Business','ASSE 5110 Certified','Better Business Bureau','EPA Lead-Safe Certified','Workers’ Comp Insured','OSHA 30 Certified'].map((c) => (
-              <div key={c} className="card-soft p-5 flex items-center gap-3"><Award className="w-5 h-5 text-brand-accent flex-shrink-0" /><span className="text-sm font-semibold text-brand-navy">{c}</span></div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <CtaBanner />
+      <CtaBanner title="Ready for plumbing service that feels different?" subtitle="Call Maston’s for friendly local help backed by veteran-owned accountability and family-owned care." />
     </>
   );
 }
